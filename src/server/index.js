@@ -58,7 +58,6 @@ app.get("/rover/:rover", async (req, res) => {
     }
     return photoData.photos;
   }));
-  console.log(photosBySol);
 
   // Send response with info and photos
   res.send({
