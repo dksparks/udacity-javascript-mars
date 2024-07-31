@@ -1,7 +1,10 @@
 let store = {
-  user: { name: "Student" },
-  apod: "",
-  rovers: ["Curiosity", "Opportunity", "Spirit"],
+  // user: { name: "Student" },
+  // apod: "",
+  // rovers: ["Curiosity", "Opportunity", "Spirit"],
+  curiosity: {},
+  opportunity: {},
+  spirit: {},
 };
 
 // add our markup to the page
@@ -20,46 +23,71 @@ const render = async (root, state) => {
 const App = (state) => {
   let { rovers, apod } = state;
 
-  return `
-        <header></header>
-        <main>
-            ${Greeting(store.user.name)}
-            <section>
-                <h3>Put things on the page!</h3>
-                <p>Here is an example section.</p>
-                <p>
-                    One of the most popular websites at NASA is the Astronomy Picture of the Day. In fact, this website is one of
-                    the most popular websites across all federal agencies. It has the popular appeal of a Justin Bieber video.
-                    This endpoint structures the APOD imagery and associated metadata so that it can be repurposed for other
-                    applications. In addition, if the concept_tags parameter is set to True, then keywords derived from the image
-                    explanation are returned. These keywords could be used as auto-generated hashtags for twitter or instagram feeds;
-                    but generally help with discoverability of relevant imagery.
-                </p>
-                ${ImageOfTheDay(apod)}
-            </section>
-        </main>
-        <footer></footer>
-    `;
+  return `${Header(store)}`;
+  // return `
+  //       <header></header>
+  //       <main>
+  //           ${Greeting(store.user.name)}
+  //           <section>
+  //               <h3>Put things on the page!</h3>
+  //               <p>Here is an example section.</p>
+  //               <p>Here is another paragraph.</p>
+  //               ${ImageOfTheDay(apod)}
+  //           </section>
+  //       </main>
+  //       <footer></footer>
+  //   `;
 };
 
-// listening for load event because page should load before any JS is called
-window.addEventListener("load", () => {
+addEventListener("load", () => {
+  selectRover(null);
   render(root, store);
 });
 
-// ------------------------------------------------------  COMPONENTS
-
-// Pure function that renders conditional information -- THIS IS JUST AN EXAMPLE, you can delete it.
-const Greeting = (name) => {
-  if (name) {
-    return `
-            <h1>Welcome, ${name}!</h1>
-        `;
-  }
-
+// Introductory message
+const Intro = () => {
   return `
-        <h1>Hello!</h1>
+    <h1>Mars Rover Dashboard</h1>
+    <p>
+      Select a rover to view information and photos.
+    </p>
+  `;
+};
+
+// Higher-order function that returns a function
+// to make a selected or unselected button
+const ButtonComponent = selected => {
+  const selectedAttr = selected ? 'selected' : '';
+  return label => {
+    return `
+      <button type="button"
+          class="${selectedAttr}"
+          onclick="selectRover('${label}')">
+        ${label}
+      </button>
     `;
+  };
+};
+
+// Menu with buttons to select rover
+const Menu = store => {
+  const rovers = Object.keys(store);
+  const { selected } = store;
+  const buttons = rovers.map(rover => {
+    return ButtonComponent(selected === rover)(rover);
+  });
+  return `<nav>${buttons.join('')}</nav>`;
+};
+
+// Click handler for buttons
+const selectRover = rover => {
+  console.log(`showing rover ${rover}`);
+  render(root, store);
+};
+
+// Header component
+const Header = store => {
+  return `<header>${Intro()}${Menu(store)}</header>`;
 };
 
 // Example of a pure function that renders infomation requested from the backend
