@@ -19,7 +19,7 @@ app.get("/rover/:rover", async (req, res) => {
   const urlStem = "https://api.nasa.gov/mars-photos/api/v1";
 
   // Minimum number of photos to show
-  const minNumberOfPhotosToShow = 60;
+  const minNumberOfPhotosToShow = 12;
 
   // First get the manifest
   let manifest;
@@ -29,6 +29,7 @@ app.get("/rover/:rover", async (req, res) => {
   } catch (err) {
     console.log("error:", err);
     res.send(null);
+    return;
   }
   const { name, landing_date, launch_date, status, photos: photoInfo } =
     manifest.photo_manifest;
@@ -54,10 +55,14 @@ app.get("/rover/:rover", async (req, res) => {
         .then((fetchResponse) => fetchResponse.json());
     } catch (err) {
       console.log("error:", err);
-      return [];
+      return "error";
     }
     return photoData.photos;
   }));
+  if (photosBySol.includes("error")) {
+    res.send(null);
+    return;
+  }
 
   // Send response with info and photos
   res.send({
