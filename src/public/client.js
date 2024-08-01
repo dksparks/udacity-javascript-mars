@@ -71,8 +71,13 @@ const selectRover = async (store, rover) => {
   if (store[rover]) {
     updateStore(store, { loading: false });
   } else {
-    const data = await getRover(rover);
-    updateStore(store, { [rover]: data, loading: false });
+    try {
+      const data = await getRover(rover);
+      updateStore(store, { [rover]: data, loading: false });
+    } catch (err) {
+      console.log("error:", err);
+      updateStore(store, { loading: false });
+    }
   }
 };
 
@@ -83,7 +88,13 @@ const Header = (store) => `<header>${Intro()}${Menu(store)}</header>`;
 const DisplayRover = (store) => {
   const { selected, loading } = store;
   if (!selected) return `<p>Select a rover above.</p>`;
-  if (loading) return `<p>Loading data for ${store.selected}...</p>`;
+  if (loading) {
+    return `
+      <p>Loading data for ${store.selected}...</p>
+      <p>Note: This may take several seconds. The NASA API can be slow, and we
+      may have to call it multiple times to collect enough photos to show.</p>
+    `;
+  }
   const data = store[store.selected];
   if (!data) return `<p>Data for ${store.selected} could not be loaded.</p>`;
   return JSON.stringify(data);
