@@ -12,14 +12,14 @@ app.use(bodyParser.json());
 
 app.use("/", express.static(path.join(__dirname, "../public")));
 
-// your API calls
+// API call for use by frontend
 app.get("/rover/:rover", async (req, res) => {
   const rover = req.params.rover;
   const apiKey = `api_key=${process.env.API_KEY}`;
   const urlStem = "https://api.nasa.gov/mars-photos/api/v1";
 
   // Minimum number of photos to show
-  const minNumberOfPhotosToShow = 12;
+  const minNumberOfPhotosToShow = 6;
 
   // First get the manifest
   let manifest;
@@ -74,17 +74,4 @@ app.get("/rover/:rover", async (req, res) => {
   });
 });
 
-// example API call
-app.get("/apod", async (req, res) => {
-  try {
-    let image = await fetch(
-      `https://api.nasa.gov/planetary/apod?api_key=${process.env.API_KEY}`,
-    )
-      .then((res) => res.json());
-    res.send({ image });
-  } catch (err) {
-    console.log("error:", err);
-  }
-});
-
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+app.listen(port, () => console.log(`App listening on port ${port}`));

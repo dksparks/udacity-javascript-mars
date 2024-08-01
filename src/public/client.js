@@ -1,9 +1,9 @@
 let store = {
   // Keep track of rover names in all lowercase for consistency
   // and capitalize via CSS
-  curiosity: null,
-  opportunity: null,
-  spirit: null,
+  // curiosity: null,
+  // opportunity: null,
+  // spirit: null,
 
   // Order in which to display buttons for rovers (chronological)
   rovers: ["spirit", "opportunity", "curiosity"],
@@ -13,12 +13,13 @@ let store = {
   loading: false,
 };
 
+// Basic structural setup
 const updateStore = (store, newState) => {
   store = Object.assign(store, newState);
   render(root, store);
 };
 const root = document.getElementById("root");
-const render = async (root, state) => {
+const render = (root, state) => {
   root.innerHTML = App(state);
 };
 addEventListener("load", () => {
