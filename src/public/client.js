@@ -34,8 +34,9 @@ const App = (state) => {
 const Intro = () => {
   return `
     <h1>Mars Rover Dashboard</h1>
+    ${BrokenImageWarning()}
     <p>
-      Select a rover to view information and photos.
+      Select a rover below to view information and photos.
     </p>
   `;
 };
@@ -97,7 +98,64 @@ const DisplayRover = (store) => {
   }
   const data = store[store.selected];
   if (!data) return `<p>Data for ${store.selected} could not be loaded.</p>`;
-  return JSON.stringify(data);
+  return `${roverInfo(data)}${roverPhotos(data)}`;
+};
+
+// Rover info component
+const roverInfo = (data) => {
+  const { name, launch_date, landing_date, status } = data;
+  return `
+    <h2>Rover: ${name}</h2>
+    <ul>
+      <li>Launch Date: ${launch_date}</li>
+      <li>Landing Date: ${landing_date}</li>
+      <li>Status: ${status}</li>
+    </ul>
+  `;
+};
+
+// Higher-order function that returns a function
+// to make an html img element with a specified alt property
+const PhotoWithAlt = (alt) => {
+  return (src) => `<img src="${src}" alt="${alt}">`;
+};
+
+// Rover photo gallery component
+const roverPhotos = (data) => {
+  const { name, photos } = data;
+  const img = PhotoWithAlt(`Photo from Mars Rover ${name}`);
+  const figures = photos.map((photo) => {
+    const { img_src, earth_date } = photo;
+    return `
+      <figure>${img(img_src)}<caption>${earth_date}</caption></figure>
+    `;
+  });
+  return `<h3>Latest Photos</h3>${figures.join("")}`;
+};
+
+// Nasa broken image warning
+const BrokenImageWarning = () => {
+  return `
+    <aside>
+      <h3>Warning</h3>
+      <p>
+        The photos for the Spirit and Opportunity rovers
+        <strong>are no longer available</strong> on NASA's website,
+        i.e., the img_src urls provided in the NASA API response are
+        <strong>broken</strong>.
+      </p>
+      <p>
+        I have attempted to complete this project as if the images were
+        still available, which means that they will appear as
+        'broken image' icons, for which I have provided appropriate
+        alternate text.
+      </p>
+      <p>
+        The images for the Curiosity rover are still available
+        on NASA's website and should appear as intended.
+      </p>
+    </aside>
+  `;
 };
 
 // API call to backend
