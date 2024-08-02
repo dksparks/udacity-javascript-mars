@@ -140,16 +140,14 @@ const BrokenImageWarning = () => {
     <aside>
       <h3>Warning</h3>
       <p>
-        The photos for the Spirit and Opportunity rovers
-        <strong>are no longer available</strong> on NASA's website,
-        i.e., the img_src urls provided in the NASA API response are
+        The photos for the Spirit and Opportunity rovers are
+        <strong>no longer available</strong> on NASA's website,
+        i.e., the img_src urls in NASA's API response are
         <strong>broken</strong>.
       </p>
       <p>
-        I have attempted to complete this project as if the images were
-        still available, which means that they will appear as
-        'broken image' icons, for which I have provided appropriate
-        alternate text.
+        I have proceeded as if the images were still available, which means
+        they will appear as 'broken image' icons with alternate text.
       </p>
       <p>
         The images for the Curiosity rover are still available
