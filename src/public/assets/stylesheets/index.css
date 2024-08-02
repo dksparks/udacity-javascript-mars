@@ -1,9 +1,58 @@
-/* -------------------  MOBILE  --------------------- */
+:root {
+  /* --color-darkest: #212121; */
+  /* --color-lightest: #d6d7d9; */
+  --color-darkest: #17181b;
+  --color-lightest: #ced0d4;
+  --color-background: var(--color-lightest);
+  --color-text: var(--color-darkest);
+  /* --color-box: #b7b9bd; */
+  /* --color-warning: #dd361c; */
+  --color-warning: #d32737;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background: var(--color-darkest);
+    --color-text: var(--color-lightest);
+    /* --color-box: #28292c; */
+    /* '#28292c', */
+    /* '#3a3b3f', */
+    /* '#4d4f52', */
+    /* --color-warning: #99231b; */
+    --color-warning: #f48178;
+    /* --color-warning: #500; */
+  }
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-text);
+  font-family: Tahoma, Arial, sans-serif;
+  line-height: 1.4;
+  margin: 0;
+  max-width: 960px;
+}
+
+aside {
+  /* background: var(--color-box); */
+  border: dashed 1px var(--color-warning);
+  padding: 0 1em;
+  margin: 1em;
+  max-width: 480px;
+}
+aside h3 {
+  /* text-align: center; */
+  /* margin-top: 0; */
+}
+aside :is(h3, strong) {
+  /* font-weight: bold; */
+  color: var(--color-warning);
+}
+
+/* MOBILE */
 
 body {
   display: flex;
   flex-direction: column;
-  font-family: Arial;
   min-height: 100vh;
 }
 
@@ -20,18 +69,18 @@ footer {
   /* footer styles */
 }
 
-/* -------------------  TABLET  --------------------- */
+/* TABLET */
 @media (min-width: 768px) {
   /* use mobile */
 }
 
-/* -------------------  DESKTOP  -------------------- */
+/* DESKTOP */
 
 @media (min-width: 1224px) {
   /* use mobile */
 }
 
-/* -------------------  LARGE SCREENS  -------------- */
+/* LARGE SCREENS */
 
 @media (min-width: 1824px) {
   /* use mobile */
