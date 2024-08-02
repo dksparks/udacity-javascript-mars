@@ -37,7 +37,7 @@ const Intro = () => {
     <h1>Mars Rover Dashboard</h1>
     ${BrokenImageWarning()}
     <p>
-      Select a rover below to view information and photos.
+      Select a rover below to view its information and latest photos.
     </p>
   `;
 };
@@ -93,7 +93,7 @@ const DisplayRover = (store) => {
   if (loading) {
     return `
       <p>Loading data for ${store.selected}...</p>
-      <p>Note: This may take several seconds. The NASA API can be slow, and we
+      <p>Note: This may take several seconds. NASA's API can be slow, and we
       may have to call it multiple times to collect enough photos to show.</p>
     `;
   }
