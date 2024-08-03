@@ -69,7 +69,8 @@ const selectRover = async (store, rover) => {
   updateStore(store, { selected: rover, loading: true });
   // If rover data is already in most recent state of store (and is not null),
   // do not get it over again
-  if (store[store.length - 1][rover]) {
+  const state = store[store.length - 1].toJS();
+  if (state[rover]) {
     updateStore(store, { loading: false });
   } else {
     try {
