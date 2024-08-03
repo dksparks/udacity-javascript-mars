@@ -1,10 +1,4 @@
-let store = {
-  // Keep track of rover names in all lowercase for consistency
-  // and capitalize via CSS
-  // curiosity: null,
-  // opportunity: null,
-  // spirit: null,
-
+const store = {
   // Order in which to display buttons for rovers (chronological)
   rovers: ["spirit", "opportunity", "curiosity"],
 
@@ -14,9 +8,9 @@ let store = {
 };
 
 // Basic structural setup
-const updateStore = (store, newState) => {
-  store = Object.assign(store, newState);
-  render(root, store);
+const updateStore = (state, newState) => {
+  state = Object.assign(state, newState);
+  render(root, state);
 };
 const root = document.getElementById("root");
 const render = (root, state) => {
@@ -58,42 +52,42 @@ const ButtonComponent = (selected) => {
 };
 
 // Menu with buttons to select rover
-const Menu = (store) => {
-  const rovers = store.rovers;
+const Menu = (state) => {
+  const rovers = state.rovers;
   const buttons = rovers.map((rover) => {
-    return ButtonComponent(store.selected === rover)(rover);
+    return ButtonComponent(state.selected === rover)(rover);
   });
   return `<nav>${buttons.join("")}</nav>`;
 };
 
 // Click handler for buttons
-const selectRover = async (store, rover) => {
-  updateStore(store, { selected: rover, loading: true });
+const selectRover = async (state, rover) => {
+  updateStore(state, { selected: rover, loading: true });
   // If rover data is already in store (and not null), do not get it again
-  if (store[rover]) {
-    updateStore(store, { loading: false });
+  if (state[rover]) {
+    updateStore(state, { loading: false });
   } else {
     try {
       const data = await getRover(rover);
-      updateStore(store, { [rover]: data, loading: false });
+      updateStore(state, { [rover]: data, loading: false });
     } catch (err) {
       console.log("error:", err);
-      updateStore(store, { loading: false });
+      updateStore(state, { loading: false });
     }
   }
 };
 
 // Header component
-const Header = (store) => `<header>${Intro()}${Menu(store)}</header>`;
+const Header = (state) => `<header>${Intro()}${Menu(state)}</header>`;
 
 // Rover display area component
-const DisplayRover = (store) => {
-  const { selected, loading } = store;
+const DisplayRover = (state) => {
+  const { selected, loading } = state;
   if (!selected) return `<p>Select a rover above.</p>`;
   if (loading) {
     return `
       <p>
-        Loading data for <span class="rover-name">${store.selected}</span>...
+        Loading data for <span class="rover-name">${state.selected}</span>...
       </p>
       <p>
         Note: This may take several seconds. NASA's API can be slow, and we
@@ -101,8 +95,8 @@ const DisplayRover = (store) => {
       </p>
     `;
   }
-  const data = store[store.selected];
-  if (!data) return `<p>Data for ${store.selected} could not be loaded.</p>`;
+  const data = state[state.selected];
+  if (!data) return `<p>Data for ${state.selected} could not be loaded.</p>`;
   return `${roverInfo(data)}${roverPhotos(data)}`;
 };
 
@@ -138,7 +132,7 @@ const roverPhotos = (data) => {
   return `<h3>Latest Photos</h3><div class="photos">${figures.join("")}</div>`;
 };
 
-// Nasa broken image warning
+// NASA broken image warning
 const BrokenImageWarning = () => {
   return `
     <aside>
