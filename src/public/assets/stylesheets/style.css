@@ -49,6 +49,10 @@ h2 {
   font-size: 1.33em;
 }
 
+p {
+  max-width: 540px;
+}
+
 aside {
   border: dashed 1px var(--color-warning);
   padding: 0 1em;
