@@ -1,4 +1,4 @@
-:root {
+html {
   /* --color-darkest: #212121; */
   /* --color-lightest: #d6d7d9; */
   --color-darkest: #17181b;
@@ -8,9 +8,12 @@
   /* --color-box: #b7b9bd; */
   /* --color-warning: #dd361c; */
   --color-warning: #d32737;
+  --color-button: #0021a5;
+  /* --color-hover: #b7b9bd; */
+  /* --color-hover: #a0a2a6; */
 }
 @media (prefers-color-scheme: dark) {
-  :root {
+  html {
     --color-background: var(--color-darkest);
     --color-text: var(--color-lightest);
     /* --color-box: #28292c; */
@@ -20,6 +23,8 @@
     /* --color-warning: #99231b; */
     --color-warning: #f48178;
     /* --color-warning: #500; */
+    --color-button: #4da7fc;
+    /* --color-hover: #3a3b3f; */
   }
 }
 
@@ -33,19 +38,45 @@ body {
 }
 
 aside {
-  /* background: var(--color-box); */
   border: dashed 1px var(--color-warning);
   padding: 0 1em;
   margin: 1em;
   max-width: 480px;
 }
-aside h3 {
-  /* text-align: center; */
-  /* margin-top: 0; */
-}
 aside :is(h3, strong) {
-  /* font-weight: bold; */
   color: var(--color-warning);
+}
+
+.rover-name {
+  text-transform: capitalize;
+}
+
+button {
+  /* width: 120px; */
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: bold;
+  background: inherit;
+  color: var(--color-button);
+  border: solid 2px var(--color-button);
+  border-radius: 6px;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+button.selected {
+  background: var(--color-button);
+  color: var(--color-background);
+}
+button:hover:not(.selected) {
+  padding: 5px 11px;
+  border-width: 3px;
+}
+
+.photos {
+  text-align: center;
+}
+figcaption {
+  text-align: center;
 }
 
 /* MOBILE */

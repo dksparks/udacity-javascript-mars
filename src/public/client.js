@@ -45,11 +45,11 @@ const Intro = () => {
 // Higher-order function that returns a function
 // to make a selected or unselected button
 const ButtonComponent = (selected) => {
-  const selectedAttr = selected ? "selected" : "";
+  const selectedAttr = selected ? " selected" : "";
   return (label) => {
     return `
       <button type="button"
-          class="${selectedAttr}"
+          class="rover-name${selectedAttr}"
           onclick="selectRover(store, '${label}')">
         ${label}
       </button>
@@ -92,9 +92,13 @@ const DisplayRover = (store) => {
   if (!selected) return `<p>Select a rover above.</p>`;
   if (loading) {
     return `
-      <p>Loading data for ${store.selected}...</p>
-      <p>Note: This may take several seconds. NASA's API can be slow, and we
-      may have to call it multiple times to collect enough photos to show.</p>
+      <p>
+        Loading data for <span class="rover-name">${store.selected}</span>...
+      </p>
+      <p>
+        Note: This may take several seconds. NASA's API can be slow, and we
+        may have to call it multiple times to collect enough photos to show.
+      </p>
     `;
   }
   const data = store[store.selected];
@@ -128,10 +132,10 @@ const roverPhotos = (data) => {
   const figures = photos.map((photo) => {
     const { img_src, earth_date } = photo;
     return `
-      <figure>${img(img_src)}<caption>${earth_date}</caption></figure>
+      <figure><figcaption>${earth_date}</figcaption>${img(img_src)}</figure>
     `;
   });
-  return `<h3>Latest Photos</h3>${figures.join("")}`;
+  return `<h3>Latest Photos</h3><div class="photos">${figures.join("")}</div>`;
 };
 
 // Nasa broken image warning
