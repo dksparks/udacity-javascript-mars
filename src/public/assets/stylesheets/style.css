@@ -44,7 +44,6 @@ main {
 aside {
   border: dashed 1px var(--color-warning);
   padding: 0 1em;
-  margin: 1em;
   max-width: 480px;
 }
 
@@ -106,15 +105,15 @@ img {
   main {
     padding: 10px;
   }
+
   h1 {
     font-size: 1.5em;
   }
+
   h2 {
     font-size: 1.33em;
   }
-  aside {
-    margin: 0;
-  }
+
   button {
     margin: 0;
   }
