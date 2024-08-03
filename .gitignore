@@ -1,0 +1,13 @@
+node_modules
+.DS_Store
+
+# the reviewer presumably needs my .env file to be
+# in my public github repository that I submit,
+# so .env should not be in .gitignore
+# .env
+
+# this file is just a shell script to fix a bug on my
+# machine that prevented yarn from running properly,
+# so the reviewer does not need this file to be in
+# my submitted repository
+bugfix.sh

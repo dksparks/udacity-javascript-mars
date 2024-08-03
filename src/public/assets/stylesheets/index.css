@@ -16,19 +16,11 @@ html {
   }
 }
 
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
-}
-
 body {
   background: var(--color-background);
   color: var(--color-text);
   font-family: Tahoma, Arial, sans-serif;
-  font-size: 16px;
   line-height: 1.4;
-  margin: 0;
   max-width: 960px;
   display: flex;
   flex-direction: column;
@@ -89,10 +81,6 @@ button:hover:not(.selected) {
   border-width: 3px;
 }
 
-ul {
-  list-style: none;
-}
-
 .photos {
   text-align: center;
 }
@@ -103,11 +91,6 @@ figure {
 
 figcaption {
   text-align: center;
-}
-
-img {
-  max-width: 100%;
-  height: auto;
 }
 
 @media (min-width: 768px) {
