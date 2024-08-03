@@ -1,3 +1,28 @@
+# Mars Rover Dashboard Project for Udacity Functional JavaScript Course
+
+This is my submission for the Mars Rover Dashboard
+project, which is the final part of the Udacity
+Functional JavaScript course.
+
+> ### Warning
+>
+> The photos for Spirit and Opportunity are
+> **no longer available** on NASA's website,
+> i.e., the `img_src` urls in NASA's API response
+> are **broken**.
+>
+> I have proceeded as if they were still available,
+> which means they will appear as 'broken image' icons
+> with alternate text.
+>
+> The images for Curiosity are still available on
+> NASA's website and should appear as intended.
+
+The original README.md that was provided with the
+foundational code is preserved below.
+
+---
+
 # Functional Programming with Javascript 
 
 ## Student Instructions
