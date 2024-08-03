@@ -1,29 +1,33 @@
-const store = {
-  // Order in which to display buttons for rovers (chronological)
-  rovers: ["spirit", "opportunity", "curiosity"],
-
-  // Other aspects of state
+// Instead of the store being a single object, it is instead an array
+// containing the entire state history, managed using Immutable.js.
+//
+// Only the most recent (i.e., last) value will actually be used for anything.
+// The past values are kept merely to demonstrate the usage of Immutable.js.
+const store = [Immutable.Map({
   selected: null,
   loading: false,
+  // Order in which to display buttons for rovers (chronological)
+  rovers: ["spirit", "opportunity", "curiosity"],
+})];
+
+// Function to add a newly updated entry to the store
+const updateStore = (store, changes) => {
+  store.push(store[store.length - 1].merge(changes));
+  render(root, store);
 };
 
-// Basic structural setup
-const updateStore = (state, newState) => {
-  state = Object.assign(state, newState);
-  render(root, state);
-};
+// Basic setup for rendering
 const root = document.getElementById("root");
-const render = (root, state) => {
+const render = (root, store) => {
+  // Convert the current state from an Immutable.js Map
+  // to a plain JavaScript object for convenience
+  const state = store[store.length - 1].toJS();
   root.innerHTML = App(state);
 };
-addEventListener("load", () => {
-  render(root, store);
-});
+addEventListener("load", () => render(root, store));
 
 // Overall app content
-const App = (state) => {
-  return `${Header(state)}${DisplayRover(state)}`;
-};
+const App = (state) => `${Header(state)}${DisplayRover(state)}`;
 
 // Introductory message
 const Intro = () => {
@@ -61,18 +65,19 @@ const Menu = (state) => {
 };
 
 // Click handler for buttons
-const selectRover = async (state, rover) => {
-  updateStore(state, { selected: rover, loading: true });
-  // If rover data is already in store (and not null), do not get it again
-  if (state[rover]) {
-    updateStore(state, { loading: false });
+const selectRover = async (store, rover) => {
+  updateStore(store, { selected: rover, loading: true });
+  // If rover data is already in most recent state of store (and is not null),
+  // do not get it over again
+  if (store[store.length - 1][rover]) {
+    updateStore(store, { loading: false });
   } else {
     try {
       const data = await getRover(rover);
-      updateStore(state, { [rover]: data, loading: false });
+      updateStore(store, { [rover]: data, loading: false });
     } catch (err) {
       console.log("error:", err);
-      updateStore(state, { loading: false });
+      updateStore(store, { loading: false });
     }
   }
 };
