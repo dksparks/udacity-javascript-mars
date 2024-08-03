@@ -1,40 +1,43 @@
 html {
-  /* --color-darkest: #212121; */
-  /* --color-lightest: #d6d7d9; */
   --color-darkest: #17181b;
   --color-lightest: #ced0d4;
   --color-background: var(--color-lightest);
   --color-text: var(--color-darkest);
-  /* --color-box: #b7b9bd; */
-  /* --color-warning: #dd361c; */
   --color-warning: #d32737;
   --color-button: #0021a5;
-  /* --color-hover: #b7b9bd; */
-  /* --color-hover: #a0a2a6; */
 }
+
 @media (prefers-color-scheme: dark) {
   html {
     --color-background: var(--color-darkest);
     --color-text: var(--color-lightest);
-    /* --color-box: #28292c; */
-    /* '#28292c', */
-    /* '#3a3b3f', */
-    /* '#4d4f52', */
-    /* --color-warning: #99231b; */
     --color-warning: #f48178;
-    /* --color-warning: #500; */
     --color-button: #4da7fc;
-    /* --color-hover: #3a3b3f; */
   }
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
 }
 
 body {
   background: var(--color-background);
   color: var(--color-text);
   font-family: Tahoma, Arial, sans-serif;
+  font-size: 16px;
   line-height: 1.4;
   margin: 0;
   max-width: 960px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+  padding: 20px;
 }
 
 aside {
@@ -43,6 +46,7 @@ aside {
   margin: 1em;
   max-width: 480px;
 }
+
 aside :is(h3, strong) {
   color: var(--color-warning);
 }
@@ -52,9 +56,8 @@ aside :is(h3, strong) {
 }
 
 button {
-  /* width: 120px; */
   font-family: inherit;
-  font-size: 16px;
+  font-size: inherit;
   font-weight: bold;
   background: inherit;
   color: var(--color-button);
@@ -63,42 +66,35 @@ button {
   padding: 6px 12px;
   cursor: pointer;
 }
+
 button.selected {
   background: var(--color-button);
   color: var(--color-background);
 }
+
 button:hover:not(.selected) {
   padding: 5px 11px;
   border-width: 3px;
 }
 
+ul {
+  list-style: none;
+}
+
 .photos {
   text-align: center;
 }
+
 figcaption {
   text-align: center;
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+}
+
 /* MOBILE */
-
-body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-header {
-  /* header styles */
-}
-
-main {
-  flex: 1;
-  padding: 20px;
-}
-
-footer {
-  /* footer styles */
-}
 
 /* TABLET */
 @media (min-width: 768px) {
