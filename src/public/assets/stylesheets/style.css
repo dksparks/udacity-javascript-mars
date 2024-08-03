@@ -38,7 +38,15 @@ body {
 
 main {
   flex: 1;
-  padding: 20px;
+  padding: 10px;
+}
+
+h1 {
+  font-size: 1.5em;
+}
+
+h2 {
+  font-size: 1.33em;
 }
 
 aside {
@@ -65,7 +73,6 @@ button {
   border-radius: 6px;
   padding: 6px 12px;
   cursor: pointer;
-  margin: 0 6px;
 }
 
 button.selected {
@@ -99,39 +106,20 @@ img {
   height: auto;
 }
 
-/* MOBILE */
-/* this should really be 767px */
-@media (max-width: 499px) {
+@media (min-width: 768px) {
   main {
-    padding: 10px;
+    padding: 20px;
   }
 
   h1 {
-    font-size: 1.5em;
+    font-size: 2em;
   }
 
   h2 {
-    font-size: 1.33em;
+    font-size: 1.5em;
   }
 
   button {
-    margin: 0;
+    margin: 0 6px;
   }
-}
-
-/* TABLET */
-@media (min-width: 768px) {
-  /* use mobile */
-}
-
-/* DESKTOP */
-
-@media (min-width: 1224px) {
-  /* use mobile */
-}
-
-/* LARGE SCREENS */
-
-@media (min-width: 1824px) {
-  /* use mobile */
 }
