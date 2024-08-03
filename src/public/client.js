@@ -163,6 +163,6 @@ const BrokenImageWarning = () => {
 // API call to backend
 const getRover = async (rover) => {
   const data = await fetch(`http://localhost:3000/rover/${rover}`)
-    .then((fetchResponse) => fetchResponse.json());
+    .then((response) => response.json());
   return data;
 };

@@ -25,7 +25,7 @@ app.get("/rover/:rover", async (req, res) => {
   let manifest;
   try {
     manifest = await fetch(`${urlStem}/manifests/${rover}?${apiKey}`)
-      .then((fetchResponse) => fetchResponse.json());
+      .then((response) => response.json());
   } catch (err) {
     console.log("error:", err);
     res.send(null);
@@ -52,7 +52,7 @@ app.get("/rover/:rover", async (req, res) => {
     try {
       const params = `${apiKey}&sol=${sol}`;
       photoData = await fetch(`${urlStem}/rovers/${rover}/photos?${params}`)
-        .then((fetchResponse) => fetchResponse.json());
+        .then((response) => response.json());
     } catch (err) {
       console.log("error:", err);
       return "error";
